@@ -13,9 +13,9 @@ const bodyFont = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "SprzÄ…tanie mieszkaĹ„ i biur w Wrocław | Szybka wycena i termin",
+  title: "Sprzątanie mieszkań i biur w Wrocław | Szybka wycena i termin",
   description:
-    "SprzÄ…tanie mieszkaĹ„ i biur w Wrocław. Szybki termin, jasny zakres, przewidywalna cena. ZgĹ‚oszenie w 60 sekund, oddzwonimy w 10 minut.",
+    "Sprzątanie mieszkań i biur w Wrocław. Szybki termin, jasny zakres, przewidywalna cena. Zgłoszenie w 60 sekund, oddzwonimy w 10 minut.",
 };
 
 export default function RootLayout({
@@ -31,4 +31,3 @@ export default function RootLayout({
     </html>
   );
 }
-
