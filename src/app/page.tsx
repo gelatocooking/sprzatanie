@@ -16,7 +16,7 @@ export default function Home() {
             "@type": "LocalBusiness",
             name: "Sprzątanie mieszkań i biur Wrocław",
             areaServed: "Wrocław",
-            telephone: "+48XXXXXXXXX",
+            telephone: "+48 693 858 260",
             url: "https://example.com",
           }),
         }}
@@ -33,8 +33,8 @@ export default function Home() {
             <a href="#wybor">Dlaczego my</a>
             <a href="#zakup">Zgłoszenie</a>
           </nav>
-          <a className="btn secondary" href="tel:+48XXXXXXXXX">
-            Telefon: [Telefon]
+          <a className="btn secondary" href="tel:+48693858260">
+            Telefon: +48 693 858 260
           </a>
         </div>
       </header>

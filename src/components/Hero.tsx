@@ -30,8 +30,8 @@ export default function Hero() {
             <a className="btn primary" href="#zakup">
               Poproś o wycenę (60 sek)
             </a>
-            <a className="btn secondary" href="tel:+48XXXXXXXXX">
-              Zadzwoń: [Telefon]
+            <a className="btn secondary" href="tel:+48693858260">
+              Zadzwoń: +48 693 858 260
             </a>
           </div>
         </div>
