@@ -4,6 +4,7 @@ import Koncepcja from "../components/Koncepcja";
 import Problem from "../components/Problem";
 import Wybor from "../components/Wybor";
 import Zakup from "../components/Zakup";
+import { getSiteUrl } from "../lib/site";
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
             name: "Sprzątanie mieszkań i biur Wrocław",
             areaServed: "Wrocław",
             telephone: "+48 693 858 260",
-            url: "https://example.com",
+            url: getSiteUrl(),
           }),
         }}
       />

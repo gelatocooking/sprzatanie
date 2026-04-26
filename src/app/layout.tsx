@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
+import { getSiteUrl } from "../lib/site";
 import "./globals.css";
 
 const displayFont = Bricolage_Grotesque({
@@ -13,6 +14,7 @@ const bodyFont = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: "Sprzątanie mieszkań i biur w Wrocław | Szybka wycena i termin",
   description:
     "Sprzątanie mieszkań i biur w Wrocław. Szybki termin, jasny zakres, przewidywalna cena. Zgłoszenie w 60 sekund, oddzwonimy w 10 minut.",
