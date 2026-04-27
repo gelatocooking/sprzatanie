@@ -1,43 +1,41 @@
+import CheckList from "./ui/CheckList";
+import Container from "./ui/Container";
+import FeatureCard from "./ui/FeatureCard";
+import ProcessSteps from "./ui/ProcessSteps";
+import SectionCard from "./ui/SectionCard";
+import SectionHeader from "./ui/SectionHeader";
+
+const steps = [
+  { label: "Wypełniasz formularz (30–60 sek) lub dzwonisz" },
+  { label: "Oddzwaniamy, doprecyzowujemy zakres i termin (2–3 min)" },
+  { label: "Potwierdzamy termin i przekazujemy realizację do ekipy" },
+];
+
+const pricingInputs = [
+  "Metraż i liczba pomieszczeń",
+  "Rodzaj sprzątania: standard, po remoncie, po wyprowadzce, biuro",
+  "Dodatki: okna, AGD, wnętrza szafek, balkon, taras",
+];
+
 export default function Koncepcja() {
   return (
-    <section id="koncepcja" className="section">
-      <div className="container reveal">
-        <p className="eyebrow">Filar 2: Koncepcja</p>
-        <h2 className="headline">
-          Jak to działa? Jedno zgłoszenie i dobieramy ekipę do Twojego zlecenia
-        </h2>
-        <div className="grid mt-lg">
-          <div className="card">
-            <h3>3 kroki</h3>
-            <ol className="steps">
-              <li>
-                <span className="step-number">01</span>
-                <span>Wypełniasz formularz (30–60 sek) lub dzwonisz</span>
-              </li>
-              <li>
-                <span className="step-number">02</span>
-                <span>Oddzwaniamy, doprecyzowujemy zakres i termin (2–3 min)</span>
-              </li>
-              <li>
-                <span className="step-number">03</span>
-                <span>Potwierdzamy termin i przekazujemy realizację do ekipy</span>
-              </li>
-            </ol>
+    <section id="koncepcja" className="ui-section">
+      <Container>
+        <SectionCard>
+          <div className="ui-stack-section">
+            <SectionHeader kicker="Filar 2: Koncepcja" title="Jak wygląda wycena?" />
+            <div className="ui-grid-2">
+              <FeatureCard list={<ProcessSteps steps={steps} />} title="3 kroki" />
+              <FeatureCard
+                description="Wycena nie opiera się na zgadywaniu. Liczy się realny zakres, metraż, poziom zabrudzeń, dodatki i termin realizacji."
+                list={<CheckList compact items={pricingInputs} />}
+                title="Co bierzemy pod uwagę"
+                variant="warm"
+              />
+            </div>
           </div>
-          <div className="card">
-            <h3>Dlaczego to działa</h3>
-            <p className="lead">
-              Nie musisz szukać kilku firm i porównywać w ciemno — zbieramy
-              wymagania i dopasowujemy wykonanie do realnego zakresu.
-            </p>
-            <ul className="list mt-sm">
-              <li>Jedna rozmowa = jasne widełki cenowe</li>
-              <li>Checklista daje przewidywalność realizacji</li>
-              <li>Termin dopasowany do Twojego harmonogramu</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        </SectionCard>
+      </Container>
     </section>
   );
 }

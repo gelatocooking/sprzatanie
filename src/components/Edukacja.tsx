@@ -1,44 +1,65 @@
+import CheckList from "./ui/CheckList";
+import Container from "./ui/Container";
+import FeatureCard from "./ui/FeatureCard";
+import SectionCard from "./ui/SectionCard";
+import SectionHeader from "./ui/SectionHeader";
+
+const pricingCards = [
+  {
+    title: "Sprzątanie mieszkań i domów",
+    items: [
+      "Sprzątanie mieszkań: od 180 zł",
+      "Zakres zależy od metrażu, liczby łazienek i dodatków",
+      "Domy wyceniamy po powierzchni i liczbie pomieszczeń",
+      "Dla regularnych zleceń ustalamy indywidualne stawki",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Sprzątanie biur i lokali",
+    items: [
+      "Wycena indywidualna po metrażu i częstotliwości",
+      "Możliwa obsługa jednorazowa lub cykliczna",
+      "Zakres ustalamy pod biuro, lokal usługowy lub gabinet",
+      "Termin dopasowujemy do godzin pracy obiektu",
+    ],
+    variant: "accent" as const,
+  },
+  {
+    title: "Mycie okien i dodatki",
+    items: [
+      "Sprzątanie po remoncie: od 12–18 zł/m²",
+      "Mycie okien: od 25–45 zł/szt.",
+      "Piekarnik / lodówka / wnętrza szafek: wycena po zakresie",
+      "Balkon, taras i trudniejsze zabrudzenia: wycena indywidualna",
+    ],
+    variant: "warm" as const,
+  },
+];
+
 export default function Edukacja() {
   return (
-    <section id="edukacja" className="section light">
-      <div className="container reveal">
-        <p className="eyebrow">Filar 3: Edukacja</p>
-        <h2 className="headline">
-          Co wpływa na cenę i zakres? (żebyś od razu wiedział/a, czego się spodziewać)
-        </h2>
-        <div className="grid mt-lg">
-          <div className="card">
-            <h3>Cena zależy głównie od</h3>
-            <ul className="list">
-              <li>Metrażu / liczby pomieszczeń</li>
-              <li>Rodzaju sprzątania (standard vs po remoncie)</li>
-              <li>Poziomu zabrudzeń i ilości detali</li>
-              <li>Dodatków (okna, piekarnik, lodówka, balkon)</li>
-            </ul>
+    <section id="edukacja" className="ui-section">
+      <Container>
+        <SectionCard muted>
+          <div className="ui-stack-section">
+            <SectionHeader
+              kicker="Filar 3: Edukacja"
+              title="Cennik usług sprzątania we Wrocławiu"
+            />
+            <div className="ui-grid-3">
+              {pricingCards.map((card) => (
+                <FeatureCard
+                  key={card.title}
+                  list={<CheckList compact items={card.items} />}
+                  title={card.title}
+                  variant={card.variant}
+                />
+              ))}
+            </div>
           </div>
-          <div className="card">
-            <h3>Co zwykle jest w “standardzie”</h3>
-            <ul className="list">
-              <li>Odkurzanie i mycie podłóg</li>
-              <li>Przetarcie blatów i frontów z zewnątrz</li>
-              <li>Łazienka (umywalka, toaleta, prysznic/wanna)</li>
-              <li>Wyniesienie śmieci</li>
-            </ul>
-          </div>
-          <div className="card">
-            <h3>Dodatki (na życzenie)</h3>
-            <ul className="list">
-              <li>Mycie okien</li>
-              <li>Piekarnik / lodówka</li>
-              <li>Wnętrza szafek</li>
-              <li>Sprzątanie po remoncie (detailing)</li>
-            </ul>
-          </div>
-        </div>
-        <p className="micro mt-md">
-          Te listy budują long-taile typu “sprzątanie po remoncie co obejmuje”.
-        </p>
-      </div>
+        </SectionCard>
+      </Container>
     </section>
   );
 }

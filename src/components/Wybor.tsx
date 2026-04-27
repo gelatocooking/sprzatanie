@@ -1,65 +1,101 @@
+import CheckList from "./ui/CheckList";
+import Container from "./ui/Container";
+import FeatureCard from "./ui/FeatureCard";
+import SectionCard from "./ui/SectionCard";
+import SectionHeader from "./ui/SectionHeader";
+import TestimonialCard from "./ui/TestimonialCard";
+
+const serviceCards = [
+  {
+    title: "Sprzątanie mieszkań i domów",
+    items: [
+      "Sprzątanie standardowe i generalne",
+      "Obsługa mieszkań po najmie i przed sprzedażą",
+      "Zakres ustalany pod metraż i priorytety klienta",
+      "Możliwe zlecenia pilne i planowane",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Sprzątanie biur i lokali",
+    items: [
+      "Biura, gabinety, punkty usługowe i małe lokale",
+      "Wycena po powierzchni, grafiku i częstotliwości",
+      "Możliwa obsługa przed otwarciem lub po godzinach pracy",
+      "Stały zakres albo jednorazowe doprowadzenie lokalu do porządku",
+    ],
+    variant: "accent" as const,
+  },
+  {
+    title: "Sprzątanie po wyprowadzce i przed wynajmem",
+    items: [
+      "Przygotowanie mieszkania dla nowego najemcy lub kupującego",
+      "Doczyszczenie kuchni, łazienki, podłóg i newralgicznych miejsc",
+      "Możliwość rozszerzenia zakresu o okna i AGD",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Dlaczego klienci wybierają nas w Wrocławiu",
+    items: [
+      "Szybki kontakt i jasny termin",
+      "Zakres prac ustalany przed realizacją",
+      "Przejrzysta wycena zamiast ogólników",
+      "Dopasowanie ekipy do typu zlecenia",
+    ],
+    variant: "warm" as const,
+  },
+];
+
+const testimonials = [
+  {
+    quote: "“Po remoncie mieszkanie wyglądało jak nowe. Termin szybki, ekipa punktualna.”",
+    meta: "Sprzątanie po remoncie w Wrocławiu",
+  },
+  {
+    quote: "“Jasny zakres, bez niespodzianek. Dostałam SMS z terminem tego samego dnia.”",
+    meta: "Sprzątanie mieszkania przed wynajmem",
+  },
+  {
+    quote: "“Wystarczyła krótka rozmowa i wszystko było ogarnięte. Polecam.”",
+    meta: "Sprzątanie biura jednorazowe",
+  },
+];
+
 export default function Wybor() {
   return (
-    <section id="wybor" className="section">
-      <div className="container reveal">
-        <p className="eyebrow">Filar 4: Wybór</p>
-        <h2 className="headline">Dlaczego klienci wybierają nas w Wrocław?</h2>
-        <div className="grid mt-lg">
-          <div className="card">
-            <h3>Bo dostają konkret zamiast zgadywania</h3>
-            <ul className="list">
-              <li>Szybki kontakt i jasny termin</li>
-              <li>Checklista zakresu (wiesz, co wchodzi)</li>
-              <li>Widełki cenowe po krótkiej rozmowie</li>
-              <li>Zasady dopłat ustalane przed realizacją</li>
-            </ul>
+    <section id="wybor" className="ui-section">
+      <Container>
+        <SectionCard>
+          <div className="ui-stack-section">
+            <SectionHeader
+              kicker="Filar 4: Wybór"
+              title="Sprzątanie mieszkań i domów, biur i lokali"
+            />
+            <div className="ui-grid-2">
+              {serviceCards.map((card) => (
+                <FeatureCard
+                  key={card.title}
+                  list={<CheckList compact items={card.items} />}
+                  title={card.title}
+                  variant={card.variant}
+                />
+              ))}
+            </div>
+            <div className="ui-stack-md">
+              <SectionHeader
+                kicker="Zaufanie"
+                title="Opinie i typowe realizacje"
+              />
+              <div className="ui-home-quote-grid">
+                {testimonials.map((item) => (
+                  <TestimonialCard key={item.meta} meta={item.meta} quote={item.quote} />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="card">
-            <h3>Widełki (opcjonalnie)</h3>
-            <ul className="price-list">
-              <li>
-                <span>Sprzątanie standardowe</span>
-                <span>od X zł</span>
-              </li>
-              <li>
-                <span>Sprzątanie po remoncie</span>
-                <span>od Y zł</span>
-              </li>
-              <li>
-                <span>Sprzątanie po wyprowadzce</span>
-                <span>od Z zł</span>
-              </li>
-            </ul>
-            <p className="micro mt-xs">
-              Jeśli nie chcesz podawać liczb: wpisz “od X zł” i doprecyzuj w rozmowie,
-              ale lepiej mieć chociaż “od”.
-            </p>
-          </div>
-        </div>
-        <div className="mt-xl">
-          <h3 className="headline-small">Opinie / realizacje</h3>
-          <div className="quote-grid mt-md">
-            <figure className="card">
-              <blockquote className="quote">
-                “Po remoncie mieszkanie wyglądało jak nowe. Termin szybki, ekipa punktualna.”
-              </blockquote>
-              <figcaption className="micro">Sprzątanie po remoncie w Wrocław</figcaption>
-            </figure>
-            <figure className="card">
-              <blockquote className="quote">
-                “Jasny zakres, bez niespodzianek. Dostałam SMS z terminem tego samego dnia.”
-              </blockquote>
-              <figcaption className="micro">Sprzątanie mieszkania przed wynajmem</figcaption>
-            </figure>
-            <figure className="card">
-              <blockquote className="quote">
-                “Wystarczyła krótka rozmowa i wszystko było ogarnięte. Polecam.”
-              </blockquote>
-              <figcaption className="micro">Sprzątanie biura jednorazowe</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
+        </SectionCard>
+      </Container>
     </section>
   );
 }

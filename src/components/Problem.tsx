@@ -1,38 +1,57 @@
+import CheckList from "./ui/CheckList";
+import Container from "./ui/Container";
+import FeatureCard from "./ui/FeatureCard";
+import SectionCard from "./ui/SectionCard";
+import SectionHeader from "./ui/SectionHeader";
+
+const cards = [
+  {
+    title: "Najczęstsze sytuacje, które obsługujemy",
+    items: [
+      "Sprzątanie po remoncie (pył, fugi, detale)",
+      "Sprzątanie po wyprowadzce / przed wynajmem",
+      "Sprzątanie standardowe mieszkania lub domu",
+      "Sprzątanie biura (jednorazowo lub cyklicznie)",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Co zdejmujemy z Twojej głowy",
+    items: [
+      "Dobór ekipy do zakresu i terminu",
+      "Checklista prac zamiast zgadywania",
+      "Ustalenie dopłat jeszcze przed realizacją",
+      "Jeden kontakt i szybka decyzja",
+    ],
+    variant: "accent" as const,
+  },
+];
+
 export default function Problem() {
   return (
-    <section id="problem" className="section light">
-      <div className="container reveal">
-        <p className="eyebrow">Filar 1: Problem</p>
-        <h2 className="headline">Masz sprzątanie “na już” albo chcesz w końcu mieć spokój?</h2>
-        <p className="lead">
-          Jeśli masz remont, wyprowadzkę, najem, gości albo po prostu brak czasu —
-          to normalne, że chcesz ogarnąć to szybko i bez stresu.
-        </p>
-        <p className="lead mt-sm">
-          Najczęściej problemem nie jest samo sprzątanie, tylko: termin, zaufanie i
-          przewidywalna cena.
-        </p>
-        <div className="grid mt-lg">
-          <div className="card">
-            <h3>Najczęstsze sytuacje, które obsługujemy</h3>
-            <ul className="list">
-              <li>Sprzątanie po remoncie (pył, fugi, detale)</li>
-              <li>Sprzątanie po wyprowadzce / przed wynajmem</li>
-              <li>Sprzątanie standardowe mieszkania lub domu</li>
-              <li>Sprzątanie biura (jednorazowo lub cyklicznie)</li>
-            </ul>
+    <section id="problem" className="ui-section">
+      <Container>
+        <SectionCard muted>
+          <div className="ui-stack-section">
+            <SectionHeader
+              description="Jeśli masz remont, wyprowadzkę, najem, gości albo po prostu brak czasu — to normalne, że chcesz ogarnąć to szybko i bez stresu."
+              kicker="Filar 1: Problem"
+              support="Najczęściej problemem nie jest samo sprzątanie, tylko: termin, zaufanie i przewidywalna cena."
+              title="Sprzątanie po remoncie we Wrocławiu i zlecenia na już"
+            />
+            <div className="ui-grid-2">
+              {cards.map((card) => (
+                <FeatureCard
+                  key={card.title}
+                  list={<CheckList compact items={card.items} />}
+                  title={card.title}
+                  variant={card.variant}
+                />
+              ))}
+            </div>
           </div>
-          <div className="card">
-            <h3>Co zdejmujemy z Twojej głowy</h3>
-            <ul className="list">
-              <li>Dobór ekipy do zakresu i terminu</li>
-              <li>Checklista prac zamiast zgadywania</li>
-              <li>Ustalenie dopłat jeszcze przed realizacją</li>
-              <li>Jeden kontakt i szybka decyzja</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        </SectionCard>
+      </Container>
     </section>
   );
 }

@@ -1,0 +1,169 @@
+:root {
+  color-scheme: light;
+
+  /* Colors */
+  --surface-page: #f5efdf;
+  --surface-page-strong: #ece2cc;
+  --surface-page-top-glow: rgba(255, 241, 210, 0.86);
+  --surface-page-bottom-glow: rgba(34, 130, 124, 0.11);
+  --surface-section: rgba(255, 252, 245, 0.82);
+  --surface-section-muted: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.58),
+    rgba(255, 251, 243, 0.68)
+  );
+  --surface-card: #fffdf8;
+  --surface-card-accent: linear-gradient(
+    180deg,
+    rgba(22, 111, 107, 0.08),
+    rgba(255, 255, 255, 0.96)
+  );
+  --surface-card-warm: linear-gradient(
+    180deg,
+    rgba(216, 139, 47, 0.1),
+    rgba(255, 255, 255, 0.96)
+  );
+  --surface-hero-accent: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(244, 232, 206, 0.9)
+  );
+  --surface-form: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(250, 242, 227, 0.94)
+  );
+  --surface-button-secondary: rgba(255, 255, 255, 0.54);
+  --surface-header: rgba(251, 246, 234, 0.78);
+  --surface-overlay-soft: rgba(255, 255, 255, 0.62);
+  --surface-overlay-strong: rgba(255, 255, 255, 0.88);
+  --border-subtle: rgba(72, 58, 37, 0.12);
+  --border-default: rgba(72, 58, 37, 0.1);
+  --border-strong: rgba(72, 58, 37, 0.2);
+  --border-accent: rgba(22, 111, 107, 0.28);
+  --text-primary: #1b1814;
+  --text-secondary: #5f584e;
+  --text-muted: #8b8377;
+  --accent-brand: #166f6b;
+  --accent-brand-soft: rgba(22, 111, 107, 0.1);
+  --accent-warm: #d88b2f;
+  --accent-warm-soft: rgba(216, 139, 47, 0.12);
+  --accent-success: #2f7a44;
+  --button-primary-bg: #1b1814;
+  --button-primary-text: #fff8f0;
+  --button-secondary-text: #1b1814;
+
+  /* Typography */
+  --font-family-display: var(--font-display, "Bricolage Grotesque", system-ui, sans-serif);
+  --font-family-body: var(--font-body, "Manrope", system-ui, sans-serif);
+  --font-size-label: 0.8125rem;
+  --font-size-body: 1rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-micro: 0.9375rem;
+  --font-size-title-sm: clamp(1.2rem, 1.1rem + 0.4vw, 1.55rem);
+  --font-size-title-md: clamp(1.75rem, 1.45rem + 1vw, 2.5rem);
+  --font-size-title-lg: clamp(2.2rem, 3.6vw, 3.6rem);
+  --font-size-title-hero: clamp(2.4rem, 2rem + 2.2vw, 4.5rem);
+  --font-size-title-service: clamp(2.2rem, 3.7vw, 3.6rem);
+  --font-size-subtitle-service: clamp(1.1rem, 1rem + 0.45vw, 1.45rem);
+  --line-height-tight: 1.02;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.5;
+  --line-height-relaxed: 1.72;
+  --line-height-micro: 1.65;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --letter-spacing-kicker: 0.18em;
+  --letter-spacing-heading: -0.04em;
+
+  /* Spacing */
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 5.5rem;
+  --space-section-y: clamp(3rem, 5vw, 4.75rem);
+  --space-section-y-mobile: clamp(3.5rem, 7vw, 4.5rem);
+  --space-section-gap: var(--space-section-y);
+  --space-grid-gap: var(--space-md);
+  --space-card-padding: clamp(1.25rem, 2vw, 1.7rem);
+  --space-form-padding: clamp(1.3rem, 2vw, 1.8rem);
+  --space-section-shell-y: clamp(1.35rem, 1.8vw, 1.75rem);
+  --space-section-shell-x: clamp(1.1rem, 1.6vw, 1.5rem);
+  --space-hero-shell-y: clamp(2.5rem, 4vw, 4rem);
+  --space-hero-shell-x: clamp(1rem, 1.35vw, 1.2rem);
+
+  /* Layout */
+  --layout-container-max-width: 1180px;
+  --layout-container-padding-x: 1rem;
+  --layout-container-padding-x-mobile: 0.5rem;
+  --layout-header-height: 5.5rem;
+  --layout-hero-min-height: calc(100vh - 4.75rem);
+  --layout-content-max-width: 48rem;
+  --layout-hero-max-width: 52rem;
+  --layout-hero-service-max-width: 48rem;
+  --layout-hero-title-max-width: 20ch;
+  --layout-hero-service-title-max-width: 16ch;
+  --layout-content-card-max-width: 60ch;
+  --layout-anchor-offset: 6.5rem;
+
+  /* Radius */
+  --radius-card: 24px;
+  --radius-section: 36px;
+  --radius-button: 999px;
+  --radius-input: 1rem;
+  --radius-pill: 999px;
+  --radius-check: 0.3rem;
+  --radius-soft: 16px;
+
+  /* Shadows */
+  --shadow-soft: 0 24px 60px rgba(39, 28, 11, 0.08);
+  --shadow-card: 0 24px 60px rgba(39, 28, 11, 0.08);
+  --shadow-section: 0 30px 90px rgba(39, 28, 11, 0.14);
+  --shadow-hover: 0 24px 42px rgba(27, 24, 20, 0.22);
+  --shadow-button: 0 18px 34px rgba(27, 24, 20, 0.18);
+
+  /* Backward-compatible aliases */
+  --color-ink: var(--text-primary);
+  --color-ink-soft: var(--text-secondary);
+  --color-ink-faint: var(--text-muted);
+  --color-bg: var(--surface-page);
+  --color-bg-strong: var(--surface-page-strong);
+  --color-surface: var(--surface-section);
+  --color-surface-strong: var(--surface-card);
+  --color-surface-accent: var(--surface-hero-accent);
+  --color-line: var(--border-subtle);
+  --color-line-strong: var(--border-strong);
+  --color-brand: var(--accent-brand);
+  --color-brand-soft: var(--accent-brand-soft);
+  --color-accent: var(--accent-warm);
+  --color-accent-soft: var(--accent-warm-soft);
+  --color-success: var(--accent-success);
+  --shadow-strong: var(--shadow-section);
+  --radius-sm: var(--radius-soft);
+  --radius-md: var(--radius-card);
+  --radius-lg: var(--radius-section);
+  --text-xs: var(--font-size-label);
+  --text-sm: var(--font-size-micro);
+  --text-md: var(--font-size-body);
+  --text-lg: var(--font-size-body-lg);
+  --text-xl: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --text-2xl: var(--font-size-title-md);
+  --text-3xl: var(--font-size-title-hero);
+  --leading-snug: var(--line-height-heading);
+  --leading-normal: var(--line-height-body);
+  --leading-relaxed: var(--line-height-relaxed);
+  --leading-tight: 1.05;
+  --weight-medium: var(--font-weight-medium);
+  --weight-semibold: var(--font-weight-semibold);
+  --weight-bold: var(--font-weight-bold);
+  --font-display: var(--font-family-display);
+  --font-body: var(--font-family-body);
+  --section-padding: var(--space-section-y);
+  --section-frame-padding-y: var(--space-section-shell-y);
+  --section-frame-padding-x: var(--space-section-shell-x);
+}
