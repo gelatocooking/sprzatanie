@@ -26,8 +26,8 @@ export default function Button(props: ButtonProps) {
     .join(" ");
 
   if ("href" in props && props.href) {
-    const anchorProps = { ...(props as ButtonAsAnchorProps) };
-    const href = anchorProps.href;
+    const href = props.href;
+    const anchorProps = { ...(props as Partial<ButtonAsAnchorProps>) };
     delete anchorProps.children;
     delete anchorProps.className;
     delete anchorProps.variant;
@@ -41,7 +41,7 @@ export default function Button(props: ButtonProps) {
     );
   }
 
-  const buttonProps = { ...(props as ButtonAsButtonProps) };
+  const buttonProps = { ...(props as Partial<ButtonAsButtonProps>) };
   const buttonType = buttonProps.type ?? "button";
   delete buttonProps.children;
   delete buttonProps.className;
