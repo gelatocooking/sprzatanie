@@ -53,7 +53,7 @@ const testimonials = [
     meta: "Sprzątanie po remoncie w Wrocławiu",
   },
   {
-    quote: "“Jasny zakres, bez niespodzianek. Dostałam SMS z terminem tego samego dnia.”",
+    quote: "“Jasny zakres, bez niespodzianek. Wszystkie ustalenia były konkretne od początku.”",
     meta: "Sprzątanie mieszkania przed wynajmem",
   },
   {

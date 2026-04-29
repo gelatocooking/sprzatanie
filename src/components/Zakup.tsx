@@ -21,18 +21,18 @@ export default function Zakup() {
             <SectionHeader
               description="Zostaw najważniejsze informacje, a wrócimy z terminem, zakresem i wstępną wyceną dopasowaną do rodzaju zlecenia."
               kicker="Filar 5: Zakup"
-              title="Zgłoszenie zajmuje 60 sekund — oddzwonimy w 10 minut"
+              title="Wyślij zgłoszenie z zakresem, metrażem i terminem"
             />
             <div className="ui-form-shell">
               <LeadForm
                 action="#"
                 actions={
                   <Button size="lg" type="submit" variant="primary">
-                    Chcę wycenę i termin
+                    Wyślij zakres i termin
                   </Button>
                 }
                 method="post"
-                support="Kontakt bez zobowiązań. Jeśli nie odbierzesz — wyślemy SMS z propozycją terminu."
+                support="Im więcej szczegółów podasz w formularzu, tym łatwiej dopasować zakres i realny termin."
               >
                 <FormField label="Imię">
                   <input

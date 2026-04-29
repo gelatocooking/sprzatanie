@@ -154,7 +154,7 @@ const testimonials = [
 const cooperationSteps = [
   {
     label:
-      "Kontakt: zadzwoń pod 882 700 883, napisz na biuro@deflo.pl lub wypełnij krótki formularz na stronie.",
+      "Kontakt: wypełnij krótki formularz na stronie, a wrócimy z dalszymi krokami.",
   },
   {
     label:
@@ -195,7 +195,7 @@ const faqItems = [
   {
     question: "Jak wygląda kontakt z firmą?",
     answer:
-      "Masz bezpośredni kontakt telefoniczny, mailowy lub osobisty. Formę komunikacji dopasowujemy do Twoich preferencji.",
+      "Masz uporządkowany kontakt przez formularz i dalszą komunikację dopasowaną do sprawy.",
   },
   {
     question: "Czy można dopasować zakres prac do budżetu?",
@@ -242,8 +242,8 @@ export default function TestPage() {
                 <Button href="#kontakt" size="lg">
                   Umów bezpłatną wizję lokalną
                 </Button>
-                <Button href="tel:+48882700883" size="lg" variant="secondary">
-                  Zadzwoń: +48 882 700 883
+                <Button href="#kontakt" size="lg" variant="secondary">
+                  Wyślij dane nieruchomości
                 </Button>
               </div>
             </div>
@@ -361,8 +361,8 @@ export default function TestPage() {
                 <Button href="#kontakt" size="lg">
                   Umów bezpłatną wizję lokalną
                 </Button>
-                <Button href="tel:+48882700883" size="lg" variant="secondary">
-                  Zadzwoń: +48 882 700 883
+                <Button href="#kontakt" size="lg" variant="secondary">
+                  Opisz zakres obsługi
                 </Button>
               </div>
             </div>
@@ -386,7 +386,7 @@ export default function TestPage() {
           <SectionCard muted>
             <div className="ui-stack-section">
               <SectionHeader
-                description="Masz dodatkowe pytania? Napisz wiadomość lub zadzwoń. Chętnie na nie odpowiemy."
+                description="Masz dodatkowe pytania? Opisz sprawę w formularzu, a wrócimy z dalszymi krokami."
                 kicker="Bezpłatna wycena"
                 support="Bez zobowiązań"
                 title="Umów bezpłatną wizję lokalną"
@@ -395,7 +395,7 @@ export default function TestPage() {
                 <LeadForm
                   action="#"
                   method="post"
-                  support="Możesz też zadzwonić bezpośrednio: +48 882 700 883."
+                  support="Im dokładniej opiszesz nieruchomość, tym łatwiej ustalić sensowny zakres obsługi."
                   actions={
                     <Button size="lg" type="submit">
                       Wyślij zgłoszenie

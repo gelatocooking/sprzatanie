@@ -27,7 +27,7 @@ const navigationLinks = [
 ];
 
 const heroActions = [
-  { href: "#formularz", label: "Poproś o wycenę sprzątania", variant: "primary" as const },
+  { href: "#formularz", label: "Wyślij metraż i zdjęcia zabrudzeń", variant: "primary" as const },
   { href: "#zakres", label: "Sprawdź, co obejmuje usługa", variant: "secondary" as const },
 ];
 
@@ -463,7 +463,7 @@ function RenovationLeadForm() {
         support="Zgłoszenie pomaga szybciej określić realny zakres, termin i możliwość wyceny."
         actions={
           <Button type="submit" variant="primary">
-            Wyślij zapytanie o wycenę
+            Wyślij metraż, termin i zdjęcia
           </Button>
         }
       >
@@ -534,7 +534,6 @@ export default function SprzataniePoRemonciePage() {
       "@id": `${siteUrl}/#organization`,
       name: "SprzątaniePro",
       url: siteUrl,
-      telephone: "+48 693 858 260",
       areaServed: {
         "@type": "City",
         name: "Wrocław",
@@ -576,7 +575,7 @@ export default function SprzataniePoRemonciePage() {
       header={
         <SiteHeader
           ctaHref="#formularz"
-          ctaLabel="Poproś o wycenę"
+          ctaLabel="Wyślij metraż"
           links={navigationLinks}
         />
       }
@@ -586,7 +585,7 @@ export default function SprzataniePoRemonciePage() {
             Formularz
           </a>
           <a className="ui-mobile-sticky-link" href="#cennik">
-            Wycena
+            Formularz
           </a>
           <a className="ui-mobile-sticky-link" href="#faq">
             Kontakt
@@ -650,7 +649,7 @@ export default function SprzataniePoRemonciePage() {
       >
         <CardsGrid cards={problemCards} />
         <div className="ui-cluster">
-          <Button href="#formularz">Poproś o wycenę sprzątania</Button>
+          <Button href="#formularz">Wyślij metraż i zdjęcia zabrudzeń</Button>
         </div>
       </ServiceSection>
 
@@ -732,7 +731,7 @@ export default function SprzataniePoRemonciePage() {
         id="formularz"
         kicker="Formularz leadowy"
         muted
-        title="Poproś o wycenę sprzątania po remoncie"
+        title="Wyślij metraż, zakres prac i preferowany termin"
       >
         <RenovationLeadForm />
       </ServiceSection>

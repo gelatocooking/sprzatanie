@@ -5,7 +5,7 @@ import SectionCard from "./ui/SectionCard";
 import SectionHeader from "./ui/SectionHeader";
 
 const heroChecklist = [
-  "Termin dopasowany do Twojej sytuacji (pilne i planowane)",
+  "Termin dopasowany do Twojej sytuacji",
   "Checklista zakresu — wiesz, za co płacisz",
   "Bez niespodzianek: zasady dopłat ustalamy przed realizacją",
 ];
@@ -31,10 +31,10 @@ export default function Hero() {
             </div>
             <div className="ui-cluster ui-home-hero__actions">
               <Button href="#zakup" size="lg" variant="primary">
-                Poproś o wycenę
+                Wyślij zakres i termin
               </Button>
-              <Button href="tel:+48693858260" size="lg" variant="secondary">
-                Zadzwoń: +48 693 858 260
+              <Button href="#zakup" size="lg" variant="secondary">
+                Sprawdź dostępny termin
               </Button>
             </div>
           </div>

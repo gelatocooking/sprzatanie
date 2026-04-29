@@ -19,15 +19,7 @@ body {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--text-primary);
-  background:
-    radial-gradient(circle at top right, var(--surface-page-top-glow), transparent 28%),
-    radial-gradient(circle at bottom left, var(--surface-page-bottom-glow), transparent 28%),
-    linear-gradient(
-      180deg,
-      var(--surface-page-start) 0%,
-      var(--surface-page) 44%,
-      var(--surface-page-strong) 100%
-    );
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -56,35 +48,13 @@ img {
   isolation: isolate;
 }
 
-.page::before,
-.page::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page::before {
-  width: 40rem;
-  height: 40rem;
-  top: -16rem;
-  right: -8rem;
-  background: radial-gradient(circle, var(--surface-page-warm-orb), transparent 65%);
-}
-
-.page::after {
-  width: 42rem;
-  height: 42rem;
-  bottom: -18rem;
-  left: -12rem;
-  background: radial-gradient(circle, var(--surface-page-brand-orb), transparent 65%);
-}
-
 .section--hero {
   display: flex;
   align-items: center;
-  min-height: var(--layout-hero-min-height);
-  padding-top: 0;
-  padding-bottom: 0;
+  width: 100vw;
+  min-height: 100svh;
+  margin-inline: calc(50% - 50vw);
+  padding: clamp(6rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  background: #142725;
+  color: #fffaf2;
 }

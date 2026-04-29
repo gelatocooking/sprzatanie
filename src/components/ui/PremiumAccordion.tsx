@@ -41,7 +41,12 @@ export default function PremiumAccordion({ items, className }: PremiumAccordionP
                 <div className="ui-premium-accordion__card-number">
                   {item.number ?? index + 1}
                 </div>
-                <h3 className="ui-premium-accordion__card-title">{item.title}</h3>
+                <h3 className="ui-premium-accordion__card-title">
+                  <span>{item.title}</span>
+                  <span className="ui-premium-accordion__card-cue" aria-hidden="true">
+                    {isActive ? "−" : "+"}
+                  </span>
+                </h3>
               </div>
               {isActive && (
                 <div

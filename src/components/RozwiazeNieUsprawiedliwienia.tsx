@@ -11,12 +11,11 @@ const solutionsData = [
     description: (
       <div className="ui-stack-sm">
         <p>
-          Nie będziesz czekać w nieskończoność. Po wypełnieniu formularza lub telefonie
-          oddzwonimy w <strong>maksymalnie 10 minut</strong>.
+          Nie będziesz czekać w nieskończoność. Po wypełnieniu formularza dostajesz
+          uporządkowaną odpowiedź o zakresie, terminie i kolejnych krokach.
         </p>
         <p className="ui-text-muted">
-          Jeśli nie będziesz w domu, wyślemy SMS-a z propozycją terminu. Brak stresu, brak
-          gry.
+          Komplet danych w zgłoszeniu skraca ustalenia i ogranicza pytania dopiero po wysłaniu formularza.
         </p>
       </div>
     ),
@@ -32,7 +31,7 @@ const solutionsData = [
           cenę i co to kosztuje.
         </p>
         <p>
-          Brak niespodzianek typu „ale to jeszcze nie wchodzi". Zasady dopłat ustalamy{" "}
+          Brak niespodzianek typu „ale to jeszcze nie wchodzi&quot;. Zasady dopłat ustalamy{" "}
           <strong>przed realizacją</strong>.
         </p>
         <p className="ui-text-muted">

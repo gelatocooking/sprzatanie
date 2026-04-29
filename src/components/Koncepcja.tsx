@@ -6,8 +6,8 @@ import SectionCard from "./ui/SectionCard";
 import SectionHeader from "./ui/SectionHeader";
 
 const steps = [
-  { label: "Wypełniasz formularz (30–60 sek) lub dzwonisz" },
-  { label: "Oddzwaniamy, doprecyzowujemy zakres i termin (2–3 min)" },
+  { label: "Wypełniasz formularz z metrażem, zakresem i terminem" },
+  { label: "Doprecyzowujemy zakres i termin na podstawie danych ze zgłoszenia" },
   { label: "Potwierdzamy termin i przekazujemy realizację do ekipy" },
 ];
 

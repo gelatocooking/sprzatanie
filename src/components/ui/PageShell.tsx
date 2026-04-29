@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import SiteFooter from "../SiteFooter";
+
 type PageShellProps = {
   children: ReactNode;
   header?: ReactNode;
@@ -12,6 +14,7 @@ export default function PageShell({ children, header, footer, className }: PageS
     <div className={["page ui-page-shell", className].filter(Boolean).join(" ")}>
       {header}
       <main className="ui-page-shell__main">{children}</main>
+      <SiteFooter />
       {footer}
     </div>
   );

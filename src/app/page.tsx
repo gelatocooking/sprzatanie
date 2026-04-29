@@ -26,7 +26,6 @@ export default function Home() {
       "@type": "Organization",
       name: "SprzątaniePro",
       url: siteUrl,
-      telephone: "+48 693 858 260",
       areaServed: {
         "@type": "City",
         name: "Wrocław",
@@ -38,7 +37,6 @@ export default function Home() {
       "@id": `${siteUrl}/#localbusiness`,
       name: "SprzątaniePro",
       url: siteUrl,
-      telephone: "+48 693 858 260",
       areaServed: {
         "@type": "City",
         name: "Wrocław",
@@ -100,8 +98,8 @@ export default function Home() {
             { href: "#wybor", label: "Dlaczego my" },
             { href: "#zakup", label: "Zgłoszenie" },
           ]}
-          ctaHref="tel:+48693858260"
-          ctaLabel="Telefon: +48 693 858 260"
+          ctaHref="#zakup"
+          ctaLabel="Wyślij zakres prac"
         />
       }
     >

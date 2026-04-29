@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   title: "Sprzątanie mieszkań i biur we Wrocławiu | Szybka wycena i termin",
   description:
-    "Sprzątanie mieszkań i biur we Wrocławiu. Szybki termin, jasny zakres, przewidywalna cena. Zgłoszenie w 60 sekund, oddzwonimy w 10 minut.",
+    "Sprzątanie mieszkań i biur we Wrocławiu. Szybki termin, jasny zakres, przewidywalna cena. Wyślij metraż, zakres i preferowany termin.",
   robots: {
     index: true,
     follow: true,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "SprzątaniePro",
     title: "Sprzątanie mieszkań i biur we Wrocławiu | Szybka wycena i termin",
     description:
-      "Sprzątanie mieszkań i biur we Wrocławiu. Szybki termin, jasny zakres i przewidywalna cena. Zostaw kontakt, oddzwonimy w 10 minut.",
+      "Sprzątanie mieszkań i biur we Wrocławiu. Szybki termin, jasny zakres i przewidywalna cena. Wyślij metraż, zakres i preferowany termin.",
   },
   twitter: {
     card: "summary",
