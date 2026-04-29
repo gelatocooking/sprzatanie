@@ -1,17 +1,300 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
-import CenteredHero from "../../components/CenteredHero";
+import Button from "../../components/ui/Button";
+import CheckList from "../../components/ui/CheckList";
+import Container from "../../components/ui/Container";
+import FAQAccordion from "../../components/ui/FAQAccordion";
+import FeatureCard from "../../components/ui/FeatureCard";
+import FormField from "../../components/ui/FormField";
+import LeadForm from "../../components/ui/LeadForm";
+import PageShell from "../../components/ui/PageShell";
+import ProcessSteps from "../../components/ui/ProcessSteps";
+import SectionCard from "../../components/ui/SectionCard";
+import SectionHeader from "../../components/ui/SectionHeader";
 import SiteHeader from "../../components/SiteHeader";
 import { getSiteUrl } from "../../lib/site";
 
 const pagePath = "/sprzatanie-po-remoncie-wroclaw";
 
+const navigationLinks = [
+  { href: "#zakres", label: "Zakres" },
+  { href: "#cennik", label: "Cennik" },
+  { href: "#lokalizacje", label: "Lokalizacje" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#formularz", label: "Formularz" },
+];
+
+const heroActions = [
+  { href: "#formularz", label: "Poproś o wycenę sprzątania", variant: "primary" as const },
+  { href: "#zakres", label: "Sprawdź, co obejmuje usługa", variant: "secondary" as const },
+];
+
+const problemCards = [
+  {
+    title: "Co warto opisać w zgłoszeniu",
+    items: [
+      "Metraż mieszkania, domu, biura lub lokalu",
+      "Rodzaj zabrudzeń po remoncie lub budowie",
+      "Liczbę okien, pomieszczeń i łazienek",
+      "Zakres dodatkowy: balkon, garaż, klatka schodowa",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Po co te dane są potrzebne",
+    items: [
+      "Łatwiej odróżnić lekkie sprzątanie od ciężkiego doczyszczania",
+      "Można szybciej oszacować orientacyjny koszt usługi",
+      "Łatwiej sprawdzić realną dostępność terminu",
+      "Opis zakresu zmniejsza ryzyko błędnej wyceny",
+    ],
+    variant: "accent" as const,
+  },
+];
+
+const scopeCards = [
+  {
+    title: "Usuwanie pyłu budowlanego",
+    items: [
+      "Usuwanie pyłu budowlanego z podłóg, listew i parapetów",
+      "Odkurzanie i mycie powierzchni",
+      "Odkurzanie trudno dostępnych miejsc",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Mycie podłóg, listew i parapetów",
+    items: ["Czyszczenie drzwi, framug i klamek", "Mycie płytek, fug i armatury", "Czyszczenie łazienki po remoncie"],
+    variant: "accent" as const,
+  },
+  {
+    title: "Czyszczenie łazienki i kuchni",
+    items: [
+      "Sprzątanie kuchni po montażu mebli lub sprzętów",
+      "Usuwanie drobnych zabrudzeń po farbie, gładzi lub silikonie",
+      "Przygotowanie mieszkania do wprowadzenia lub wynajmu",
+    ],
+    variant: "warm" as const,
+  },
+  {
+    title: "Mycie okien po remoncie",
+    items: [
+      "Mycie okien, ram i parapetów",
+      "Doczyszczanie zabrudzeń po remoncie lub budowie",
+      "Przygotowanie lokalu do odbioru albo sprzedaży",
+    ],
+    variant: "neutral" as const,
+  },
+];
+
+const serviceTypes = [
+  {
+    title: "Właściciele mieszkań",
+    description:
+      "Dla osób, które zakończyły remont i chcą szybko przygotować mieszkanie do normalnego użytkowania.",
+    variant: "neutral" as const,
+  },
+  {
+    title: "Najemcy i wynajmujący",
+    description:
+      "Dla osób przygotowujących lokal do wynajmu albo odbioru po zakończonej umowie najmu.",
+    variant: "accent" as const,
+  },
+  {
+    title: "Inwestorzy i flipperzy",
+    description:
+      "Dla osób, które chcą przygotować mieszkanie do zdjęć, prezentacji lub sprzedaży.",
+    variant: "warm" as const,
+  },
+  {
+    title: "Lokale usługowe i biura",
+    description:
+      "Dla firm, które kończą remont biura, gabinetu, salonu, punktu usługowego lub lokalu handlowego.",
+    variant: "neutral" as const,
+  },
+  {
+    title: "Ekipy remontowe",
+    description:
+      "Dla wykonawców, którzy chcą przekazać klientowi czysty lokal po zakończeniu prac.",
+    variant: "accent" as const,
+  },
+];
+
+const processSteps = [
+  {
+    label:
+      "Wysyłasz podstawowe informacje: metraż, lokalizację, rodzaj lokalu, zakres prac i preferowany termin.",
+  },
+  {
+    label:
+      "Opisujesz stan po remoncie: pył budowlany, zabrudzenia po farbie, mycie okien, łazienkę, kuchnię lub całe mieszkanie.",
+  },
+  {
+    label:
+      "Zgłoszenie trafia do weryfikacji, aby określić, czy chodzi o standardowe sprzątanie, sprzątanie poremontowe czy dodatkowe doczyszczanie.",
+  },
+  {
+    label:
+      "Otrzymujesz kontakt lub orientacyjną wycenę po analizie zgłoszenia, dostępności terminu i zakresu prac.",
+  },
+];
+
+const pricingRows = [
+  ["Sprzątanie po lekkim remoncie", "od ok. 10-15 zł/m2"],
+  ["Sprzątanie po większym remoncie", "od ok. 15-25 zł/m2"],
+  ["Sprzątanie po budowie / ciężkie zabrudzenia", "wycena indywidualna"],
+  ["Mycie okien po remoncie", "często jako usługa dodatkowa"],
+  ["Doczyszczanie fug, silikonu, farby, kleju", "często wycena indywidualna"],
+];
+
+const priceFactorCards = [
+  {
+    title: "Lokal i metraż",
+    items: ["Metraż mieszkania lub lokalu", "Liczba pomieszczeń", "Liczba okien", "Ilość pyłu budowlanego"],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Rodzaj zabrudzeń",
+    items: [
+      "Rodzaj zabrudzeń",
+      "Konieczność doczyszczania farby, kleju, fug lub silikonu",
+      "Czy lokal jest pusty, czy umeblowany",
+      "Zakres dodatkowy: balkon, garaż, piwnica, klatka schodowa",
+    ],
+    variant: "accent" as const,
+  },
+  {
+    title: "Warunki realizacji",
+    items: ["Dostęp do windy", "Piętro i możliwość parkowania", "Termin realizacji", "Rodzaj lokalu i etap po remoncie"],
+    variant: "warm" as const,
+  },
+];
+
+const checklistCards = [
+  {
+    title: "Przed zgłoszeniem",
+    items: [
+      "Czy remont jest już zakończony?",
+      "Czy ekipa remontowa wyniosła odpady?",
+      "Czy w lokalu są jeszcze narzędzia lub materiały?",
+      "Czy trzeba myć okna?",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Przed realizacją",
+    items: [
+      "Czy są zabrudzenia po farbie, silikonie, kleju lub fugach?",
+      "Czy mieszkanie ma być gotowe do zamieszkania lub wynajmu?",
+      "Czy jest dostęp do prądu i wody?",
+      "Czy można zaparkować blisko budynku?",
+    ],
+    variant: "accent" as const,
+  },
+];
+
+const attentionCards = [
+  {
+    title: "Powierzchnie i pył",
+    items: [
+      "Nie każda powierzchnia może być szorowana",
+      "Pył po gładzi wraca, jeśli lokal nie jest dokładnie odkurzony",
+      "Okna po remoncie wymagają ostrożności",
+    ],
+    variant: "neutral" as const,
+  },
+  {
+    title: "Dodatkowe prace",
+    items: [
+      "Resztki silikonu, farby i kleju mogą wymagać osobnego doczyszczania",
+      "Odpady budowlane zwykle nie są częścią standardowego sprzątania",
+      "Dobre zgłoszenie powinno zawierać metraż, zdjęcia i informacje o zabrudzeniach",
+    ],
+    variant: "warm" as const,
+  },
+];
+
+const areaCards = [
+  {
+    title: "Wrocław",
+    description:
+      "Krzyki, Fabryczna, Psie Pole, Śródmieście, Stare Miasto, Jagodno, Ołtaszyn, Muchobór, Leśnica, Zakrzów, Klecina, Brochów i Biskupin.",
+    variant: "neutral" as const,
+  },
+  {
+    title: "Okolice",
+    description:
+      "Bielany Wrocławskie, Długołęka, Kiełczów, Siechnice, Kobierzyce, Smolec, Radwanice i Żórawina.",
+    variant: "accent" as const,
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/",
+    title: "Strona główna",
+    description: "Ogólny formularz zapytań o sprzątanie we Wrocławiu.",
+  },
+  {
+    href: "/#wybor",
+    title: "Sprzątanie mieszkań",
+    description: "Zobacz zakres dla mieszkań i domów.",
+  },
+  {
+    href: "/#edukacja",
+    title: "Mycie okien",
+    description: "Informacje o dodatkach i usługach dodatkowych.",
+  },
+  {
+    href: "/#wybor",
+    title: "Sprzątanie po wyprowadzce",
+    description: "Zakres przy przygotowaniu lokalu do najmu lub sprzedaży.",
+  },
+];
+
+const formFields = [
+  { label: "Imię", name: "imie", type: "text", autoComplete: "given-name", required: true },
+  { label: "Telefon", name: "telefon", type: "tel", autoComplete: "tel", required: true },
+  { label: "E-mail (opcjonalnie)", name: "email", type: "email", autoComplete: "email" },
+  { label: "Lokalizacja / dzielnica", name: "lokalizacja", type: "text", required: true },
+  { label: "Metraż", name: "metraz", type: "text", placeholder: "np. 58 m2", required: true },
+];
+
+const selectFields = [
+  {
+    label: "Rodzaj lokalu",
+    name: "rodzaj-lokalu",
+    options: ["mieszkanie", "dom", "biuro", "lokal usługowy", "inny"],
+  },
+  {
+    label: "Rodzaj remontu",
+    name: "rodzaj-remontu",
+    options: ["malowanie", "gładzie", "łazienka", "kuchnia", "generalny remont", "wykończenie deweloperskie", "inny"],
+  },
+  {
+    label: "Zakres",
+    name: "zakres",
+    options: ["całe mieszkanie", "wybrane pomieszczenia", "łazienka", "kuchnia", "okna", "balkon", "klatka schodowa", "lokal po ekipie remontowej"],
+  },
+  {
+    label: "Czy potrzebne mycie okien?",
+    name: "okna",
+    options: ["tak", "nie", "nie wiem"],
+  },
+  {
+    label: "Preferowany termin",
+    name: "termin",
+    options: ["jak najszybciej", "w tym tygodniu", "w przyszłym tygodniu", "konkretny termin"],
+  },
+];
+
 const faqItems = [
   {
     question: "Ile kosztuje sprzątanie po remoncie we Wrocławiu?",
     answer:
-      "Cena zależy od metrażu, stopnia zabrudzenia, liczby okien i zakresu prac. Lekkie sprzątanie po remoncie może być wyceniane od około kilkunastu złotych za m², natomiast większe zabrudzenia i doczyszczanie po farbie, kleju lub silikonie zwykle wymagają indywidualnej wyceny.",
+      "Cena zależy od metrażu, stopnia zabrudzenia, liczby okien i zakresu prac. Lekkie sprzątanie po remoncie może być wyceniane od około kilkunastu złotych za m2, natomiast większe zabrudzenia i doczyszczanie po farbie, kleju lub silikonie zwykle wymagają indywidualnej wyceny.",
   },
   {
     question: "Czy sprzątanie po remoncie obejmuje mycie okien?",
@@ -61,14 +344,14 @@ const faqItems = [
 ];
 
 export const metadata: Metadata = {
-  title: "Sprzątanie po remoncie Wrocław – szybka wycena i kontakt",
+  title: "Sprzątanie po remoncie Wrocław - szybka wycena i kontakt",
   description:
     "Potrzebujesz sprzątania po remoncie we Wrocławiu? Wyślij metraż, zakres prac i termin. Pomagamy szybko zebrać zgłoszenie i przekazać je do wykonawcy.",
   alternates: {
     canonical: pagePath,
   },
   openGraph: {
-    title: "Sprzątanie po remoncie Wrocław – szybka wycena i kontakt",
+    title: "Sprzątanie po remoncie Wrocław - szybka wycena i kontakt",
     description:
       "Potrzebujesz sprzątania po remoncie we Wrocławiu? Wyślij metraż, zakres prac i termin. Pomagamy szybko zebrać zgłoszenie i przekazać je do wykonawcy.",
     url: pagePath,
@@ -77,11 +360,168 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Sprzątanie po remoncie Wrocław – szybka wycena i kontakt",
+    title: "Sprzątanie po remoncie Wrocław - szybka wycena i kontakt",
     description:
       "Potrzebujesz sprzątania po remoncie we Wrocławiu? Wyślij metraż, zakres prac i termin. Pomagamy szybko zebrać zgłoszenie i przekazać je do wykonawcy.",
   },
 };
+
+type ServiceSectionProps = {
+  id?: string;
+  muted?: boolean;
+  kicker: string;
+  title: ReactNode;
+  description?: ReactNode;
+  support?: ReactNode;
+  children: ReactNode;
+};
+
+function ServiceSection({
+  id,
+  muted,
+  kicker,
+  title,
+  description,
+  support,
+  children,
+}: ServiceSectionProps) {
+  return (
+    <section className="ui-section" id={id}>
+      <Container>
+        <SectionCard muted={muted}>
+          <div className="ui-stack-section">
+            <SectionHeader
+              description={description}
+              kicker={kicker}
+              support={support}
+              title={title}
+            />
+            {children}
+          </div>
+        </SectionCard>
+      </Container>
+    </section>
+  );
+}
+
+function CardsGrid({
+  columns = 2,
+  cards,
+}: {
+  columns?: 2 | 3;
+  cards: Array<{
+    title: string;
+    description?: string;
+    items?: string[];
+    variant: "neutral" | "accent" | "warm";
+  }>;
+}) {
+  return (
+    <div className={columns === 3 ? "ui-grid-3" : "ui-grid-2"}>
+      {cards.map((card) => (
+        <FeatureCard
+          description={card.description}
+          key={card.title}
+          list={card.items ? <CheckList compact items={card.items} /> : undefined}
+          title={card.title}
+          variant={card.variant}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PricingTable() {
+  return (
+    <div className="ui-pricing-table-wrap">
+      <table className="ui-pricing-table">
+        <thead>
+          <tr>
+            <th>Rodzaj usługi</th>
+            <th>Przykładowy sposób wyceny</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pricingRows.map(([service, price]) => (
+            <tr key={service}>
+              <td>{service}</td>
+              <td>{price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function RenovationLeadForm() {
+  return (
+    <div className="ui-form-shell">
+      <LeadForm
+        action="#"
+        method="post"
+        support="Zgłoszenie pomaga szybciej określić realny zakres, termin i możliwość wyceny."
+        actions={
+          <Button type="submit" variant="primary">
+            Wyślij zapytanie o wycenę
+          </Button>
+        }
+      >
+        {formFields.map((field) => (
+          <FormField key={field.name} label={field.label}>
+            <input className="ui-form-field__control" {...field} />
+          </FormField>
+        ))}
+
+        {selectFields.map((field) => (
+          <FormField key={field.name} label={field.label}>
+            <select className="ui-form-field__control" name={field.name} required>
+              <option value="">Wybierz opcję</option>
+              {field.options.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </FormField>
+        ))}
+
+        <FormField className="ui-lead-form__full" label="Opis sytuacji">
+          <textarea
+            className="ui-form-field__control"
+            name="opis"
+            placeholder="Opisz zakres zabrudzeń, liczbę okien, piętro, parking i to, czy remont jest już zakończony."
+            rows={5}
+          />
+        </FormField>
+
+        <FormField className="ui-lead-form__full" label="Zdjęcia zabrudzeń (opcjonalnie)">
+          <input
+            accept="image/*"
+            className="ui-form-field__control"
+            multiple
+            name="zdjecia"
+            type="file"
+          />
+        </FormField>
+
+        <div className="ui-lead-form__full ui-stack-sm">
+          <label className="ui-consent-row">
+            <input name="zgoda-kontakt" required type="checkbox" />
+            <span>Wysyłając formularz, zgadzasz się na kontakt w sprawie przesłanego zapytania.</span>
+          </label>
+          <label className="ui-consent-row">
+            <input name="zgoda-przekazanie" required type="checkbox" />
+            <span>
+              Wyrażam zgodę na przekazanie mojego zapytania partnerowi realizującemu
+              usługi sprzątania w celu przygotowania wyceny.
+            </span>
+          </label>
+        </div>
+      </LeadForm>
+    </div>
+  );
+}
 
 export default function SprzataniePoRemonciePage() {
   const siteUrl = getSiteUrl();
@@ -132,721 +572,230 @@ export default function SprzataniePoRemonciePage() {
   ];
 
   return (
-    <div className="page">
+    <PageShell
+      header={
+        <SiteHeader
+          ctaHref="#formularz"
+          ctaLabel="Poproś o wycenę"
+          links={navigationLinks}
+        />
+      }
+      footer={
+        <div className="ui-mobile-sticky-bar">
+          <a className="ui-mobile-sticky-link" href="#formularz">
+            Formularz
+          </a>
+          <a className="ui-mobile-sticky-link" href="#cennik">
+            Wycena
+          </a>
+          <a className="ui-mobile-sticky-link" href="#faq">
+            Kontakt
+          </a>
+        </div>
+      }
+    >
       <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(structuredData),
         }}
+        type="application/ld+json"
       />
 
-      <SiteHeader
-        links={[
-          { href: "#zakres", label: "Zakres" },
-          { href: "#cennik", label: "Cennik" },
-          { href: "#lokalizacje", label: "Lokalizacje" },
-          { href: "#faq", label: "FAQ" },
-          { href: "#formularz", label: "Formularz" },
-        ]}
-        ctaHref="#formularz"
-        ctaLabel="Poproś o wycenę"
-      />
-
-      <main>
-        <CenteredHero
-          id="hero"
-          pill="sprzątanie po remoncie Wrocław"
-          variant="service"
-          title={
-            <>
-              Sprzątanie po remoncie Wrocław
-              <br />
-              szybka wycena usługi
-            </>
-          }
-          titleClassName="service-hero-title"
-          subtitle="Sprzątanie po remoncie we Wrocławiu – sprawdź dostępność terminu"
-          description={
-            <>
-              Zakończyłeś remont mieszkania, domu lub lokalu? Wypełnij krótki formularz,
-              podaj metraż, zakres zabrudzeń i preferowany termin. Na tej podstawie
-              łatwiej przygotować wycenę sprzątania poremontowego.
-            </>
-          }
-          support="Zgłoszenie pozwala określić orientacyjny koszt i dostępność terminu. Wycena zależy od metrażu, stopnia zabrudzenia, liczby okien i zakresu prac."
-          actions={[
-            {
-              href: "#formularz",
-              label: "Poproś o wycenę sprzątania",
-              variant: "primary",
-            },
-            {
-              href: "#zakres",
-              label: "Sprawdź, co obejmuje usługa",
-              variant: "secondary",
-            },
-          ]}
-        />
-
-        <section className="section section--muted" id="problem">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Zakres i wycena</p>
-                  <h2 className="section-title">
-                    Dlaczego sprzątanie po remoncie wymaga dokładniejszego zakresu?
-                  </h2>
-                  <p className="section-copy">
-                    Po remoncie zwykłe odkurzanie i mycie podłóg zazwyczaj nie
-                    wystarcza. Pył budowlany osiada na listwach, drzwiach, parapetach,
-                    płytkach, fugach, oknach, meblach i trudno dostępnych miejscach.
-                  </p>
-                  <p className="section-copy">
-                    Dlatego przy wycenie ważny jest nie tylko metraż, ale też rodzaj
-                    remontu, ilość pyłu, liczba pomieszczeń, okien oraz to, czy
-                    sprzątanie ma obejmować także łazienkę, kuchnię, balkon lub klatkę
-                    schodową.
-                  </p>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <h3 className="card-title">Co warto opisać w zgłoszeniu</h3>
-                    <ul className="list">
-                      <li>Metraż mieszkania, domu, biura lub lokalu</li>
-                      <li>Rodzaj zabrudzeń po remoncie lub budowie</li>
-                      <li>Liczbę okien, pomieszczeń i łazienek</li>
-                      <li>Zakres dodatkowy: balkon, garaż, klatka schodowa</li>
-                    </ul>
-                  </div>
-                  <div className="card card-accent">
-                    <h3 className="card-title">Po co te dane są potrzebne</h3>
-                    <ul className="list">
-                      <li>Łatwiej odróżnić lekkie sprzątanie od ciężkiego doczyszczania</li>
-                      <li>Można szybciej oszacować orientacyjny koszt usługi</li>
-                      <li>Łatwiej sprawdzić realną dostępność terminu</li>
-                      <li>Opis zakresu zmniejsza ryzyko błędnej wyceny</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="cta-group">
-                  <a className="btn primary" href="#formularz">
-                    Poproś o wycenę sprzątania
-                  </a>
-                </div>
+      <section className="ui-section section section--hero" id="hero">
+        <Container>
+          <SectionCard variant="hero">
+            <div className="ui-service-hero">
+              <SectionHeader
+                align="center"
+                description="Zakończyłeś remont mieszkania, domu lub lokalu? Wypełnij krótki formularz, podaj metraż, zakres zabrudzeń i preferowany termin. Na tej podstawie łatwiej przygotować wycenę sprzątania poremontowego."
+                kicker="sprzątanie po remoncie Wrocław"
+                support="Zgłoszenie pozwala określić orientacyjny koszt i dostępność terminu. Wycena zależy od metrażu, stopnia zabrudzenia, liczby okien i zakresu prac."
+                title={
+                  <>
+                    Sprzątanie po remoncie Wrocław
+                    <br />
+                    szybka wycena usługi
+                  </>
+                }
+                titleAs="h1"
+                titleClassName="ui-service-hero__title"
+              />
+              <p className="ui-service-hero__subtitle">
+                Sprzątanie po remoncie we Wrocławiu - sprawdź dostępność terminu
+              </p>
+              <div className="ui-cluster ui-service-hero__actions">
+                {heroActions.map((action) => (
+                  <Button
+                    href={action.href}
+                    key={action.href}
+                    size="lg"
+                    variant={action.variant}
+                  >
+                    {action.label}
+                  </Button>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </SectionCard>
+        </Container>
+      </section>
 
-        <section className="section" id="zakres">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Zakres usługi</p>
-                  <h2 className="section-title">Co obejmuje sprzątanie po remoncie?</h2>
-                  <p className="section-copy">
-                    Zakres sprzątania poremontowego może obejmować czynności zależne od
-                    typu remontu, ilości pyłu oraz poziomu zabrudzeń w lokalu.
-                  </p>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <h3 className="card-title">Usuwanie pyłu budowlanego</h3>
-                    <ul className="list">
-                      <li>Usuwanie pyłu budowlanego z podłóg, listew i parapetów</li>
-                      <li>Odkurzanie i mycie powierzchni</li>
-                      <li>Odkurzanie trudno dostępnych miejsc</li>
-                    </ul>
-                  </div>
-                  <div className="card card-accent">
-                    <h3 className="card-title">Mycie podłóg, listew i parapetów</h3>
-                    <ul className="list">
-                      <li>Czyszczenie drzwi, framug i klamek</li>
-                      <li>Mycie płytek, fug i armatury</li>
-                      <li>Czyszczenie łazienki po remoncie</li>
-                    </ul>
-                  </div>
-                  <div className="card card-warm">
-                    <h3 className="card-title">Czyszczenie łazienki i kuchni</h3>
-                    <ul className="list">
-                      <li>Sprzątanie kuchni po montażu mebli lub sprzętów</li>
-                      <li>Usuwanie drobnych zabrudzeń po farbie, gładzi lub silikonie</li>
-                      <li>Przygotowanie mieszkania do wprowadzenia lub wynajmu</li>
-                    </ul>
-                  </div>
-                  <div className="card">
-                    <h3 className="card-title">Mycie okien po remoncie</h3>
-                    <ul className="list">
-                      <li>Mycie okien, ram i parapetów</li>
-                      <li>Doczyszczanie zabrudzeń po remoncie lub budowie</li>
-                      <li>Przygotowanie lokalu do odbioru albo sprzedaży</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="callout">
-                  <p className="support-copy">
-                    Dokładny zakres usługi zawsze warto ustalić przed realizacją,
-                    ponieważ nie każde zabrudzenie po remoncie da się usunąć
-                    standardowymi środkami. Niektóre powierzchnie wymagają ostrożnego
-                    doczyszczania albo osobnej wyceny.
-                  </p>
-                </div>
-                <div className="cta-group">
-                  <a className="btn primary" href="#formularz">
-                    Opisz zakres prac
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        description="Po remoncie zwykłe odkurzanie i mycie podłóg zazwyczaj nie wystarcza. Pył budowlany osiada na listwach, drzwiach, parapetach, płytkach, fugach, oknach, meblach i trudno dostępnych miejscach."
+        id="problem"
+        kicker="Zakres i wycena"
+        muted
+        support="Przy wycenie ważny jest nie tylko metraż, ale też rodzaj remontu, ilość pyłu, liczba pomieszczeń, okien oraz zakres dodatkowy."
+        title="Dlaczego sprzątanie po remoncie wymaga dokładniejszego zakresu?"
+      >
+        <CardsGrid cards={problemCards} />
+        <div className="ui-cluster">
+          <Button href="#formularz">Poproś o wycenę sprzątania</Button>
+        </div>
+      </ServiceSection>
 
-        <section className="section section--muted" id="dla-kogo">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Dla kogo</p>
-                  <h2 className="section-title">
-                    Dla kogo jest sprzątanie poremontowe we Wrocławiu?
-                  </h2>
-                </div>
-                <div className="grid grid-3">
-                  <div className="card">
-                    <h3 className="card-title">Właściciele mieszkań</h3>
-                    <p className="support-copy">
-                      Dla osób, które zakończyły remont i chcą szybko przygotować
-                      mieszkanie do normalnego użytkowania.
-                    </p>
-                  </div>
-                  <div className="card card-accent">
-                    <h3 className="card-title">Najemcy i wynajmujący</h3>
-                    <p className="support-copy">
-                      Dla osób przygotowujących lokal do wynajmu albo odbioru po
-                      zakończonej umowie najmu.
-                    </p>
-                  </div>
-                  <div className="card card-warm">
-                    <h3 className="card-title">Inwestorzy i flipperzy</h3>
-                    <p className="support-copy">
-                      Dla osób, które chcą przygotować mieszkanie do zdjęć, prezentacji
-                      lub sprzedaży.
-                    </p>
-                  </div>
-                  <div className="card">
-                    <h3 className="card-title">Lokale usługowe i biura</h3>
-                    <p className="support-copy">
-                      Dla firm, które kończą remont biura, gabinetu, salonu, punktu
-                      usługowego lub lokalu handlowego.
-                    </p>
-                  </div>
-                  <div className="card card-accent">
-                    <h3 className="card-title">Ekipy remontowe</h3>
-                    <p className="support-copy">
-                      Dla wykonawców, którzy chcą przekazać klientowi czysty lokal po
-                      zakończeniu prac.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        description="Zakres sprzątania poremontowego może obejmować czynności zależne od typu remontu, ilości pyłu oraz poziomu zabrudzeń w lokalu."
+        id="zakres"
+        kicker="Zakres usługi"
+        title="Co obejmuje sprzątanie po remoncie?"
+      >
+        <CardsGrid cards={scopeCards} />
+        <p className="ui-callout">
+          Dokładny zakres usługi zawsze warto ustalić przed realizacją, ponieważ nie każde
+          zabrudzenie po remoncie da się usunąć standardowymi środkami. Niektóre
+          powierzchnie wymagają ostrożnego doczyszczania albo osobnej wyceny.
+        </p>
+        <div className="ui-cluster">
+          <Button href="#formularz">Opisz zakres prac</Button>
+        </div>
+      </ServiceSection>
 
-        <section className="section" id="jak-to-dziala">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Proces zgłoszenia</p>
-                  <h2 className="section-title">
-                    Jak wygląda zgłoszenie sprzątania po remoncie?
-                  </h2>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <ol className="steps">
-                      <li>
-                        <span className="step-number">01</span>
-                        <span>
-                          Wysyłasz podstawowe informacje: metraż, lokalizację, rodzaj
-                          lokalu, zakres prac i preferowany termin.
-                        </span>
-                      </li>
-                      <li>
-                        <span className="step-number">02</span>
-                        <span>
-                          Opisujesz stan po remoncie: pył budowlany, zabrudzenia po
-                          farbie, mycie okien, łazienkę, kuchnię lub całe mieszkanie.
-                        </span>
-                      </li>
-                    </ol>
-                  </div>
-                  <div className="card card-accent">
-                    <ol className="steps">
-                      <li>
-                        <span className="step-number">03</span>
-                        <span>
-                          Zgłoszenie trafia do weryfikacji, aby określić, czy chodzi o
-                          standardowe sprzątanie, sprzątanie poremontowe czy dodatkowe
-                          doczyszczanie.
-                        </span>
-                      </li>
-                      <li>
-                        <span className="step-number">04</span>
-                        <span>
-                          Otrzymujesz kontakt lub orientacyjną wycenę po analizie
-                          zgłoszenia, dostępności terminu i zakresu prac.
-                        </span>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div className="callout">
-                  <p className="support-copy">
-                    Serwis pomaga zebrać zapytanie o usługę sprzątania po remoncie.
-                    Realizacja usługi zależy od dostępności wykonawcy i potwierdzonego
-                    zakresu.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        id="dla-kogo"
+        kicker="Dla kogo"
+        muted
+        title="Dla kogo jest sprzątanie poremontowe we Wrocławiu?"
+      >
+        <CardsGrid cards={serviceTypes} columns={3} />
+      </ServiceSection>
 
-        <section className="section section--muted" id="cennik">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Cennik orientacyjny</p>
-                  <h2 className="section-title">
-                    Ile kosztuje sprzątanie po remoncie we Wrocławiu?
-                  </h2>
-                  <p className="section-copy">
-                    Cena sprzątania po remoncie zależy głównie od metrażu, stopnia
-                    zabrudzenia, liczby okien, rodzaju powierzchni oraz tego, czy
-                    usługa obejmuje samo odkurzanie i mycie, czy również dokładne
-                    doczyszczanie po farbie, gładzi, silikonie lub kleju.
-                  </p>
-                </div>
-                <div className="pricing-table-wrap">
-                  <table className="pricing-table">
-                    <thead>
-                      <tr>
-                        <th>Rodzaj usługi</th>
-                        <th>Przykładowy sposób wyceny</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Sprzątanie po lekkim remoncie</td>
-                        <td>od ok. 10–15 zł/m²</td>
-                      </tr>
-                      <tr>
-                        <td>Sprzątanie po większym remoncie</td>
-                        <td>od ok. 15–25 zł/m²</td>
-                      </tr>
-                      <tr>
-                        <td>Sprzątanie po budowie / ciężkie zabrudzenia</td>
-                        <td>wycena indywidualna</td>
-                      </tr>
-                      <tr>
-                        <td>Mycie okien po remoncie</td>
-                        <td>często jako usługa dodatkowa</td>
-                      </tr>
-                      <tr>
-                        <td>Doczyszczanie fug, silikonu, farby, kleju</td>
-                        <td>często wycena indywidualna</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="callout">
-                  <p className="support-copy">
-                    Podane kwoty są orientacyjne i nie stanowią oferty handlowej.
-                    Ostateczna cena zależy od zakresu usługi i ustaleń z wykonawcą.
-                  </p>
-                </div>
-                <div className="cta-group">
-                  <a className="btn primary" href="#formularz">
-                    Sprawdź orientacyjny koszt
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        id="jak-to-dziala"
+        kicker="Proces zgłoszenia"
+        title="Jak wygląda zgłoszenie sprzątania po remoncie?"
+      >
+        <div className="ui-grid-2">
+          <FeatureCard
+            list={<ProcessSteps steps={processSteps.slice(0, 2)} />}
+            title="Informacje o lokalu"
+          />
+          <FeatureCard
+            list={<ProcessSteps steps={processSteps.slice(2)} />}
+            title="Weryfikacja i wycena"
+            variant="accent"
+          />
+        </div>
+        <p className="ui-callout">
+          Serwis pomaga zebrać zapytanie o usługę sprzątania po remoncie. Realizacja
+          usługi zależy od dostępności wykonawcy i potwierdzonego zakresu.
+        </p>
+      </ServiceSection>
 
-        <section className="section" id="czynniki-ceny">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Czynniki ceny</p>
-                  <h2 className="section-title">
-                    Co wpływa na cenę sprzątania poremontowego?
-                  </h2>
-                </div>
-                <div className="grid grid-3">
-                  <div className="card">
-                    <ul className="list">
-                      <li>Metraż mieszkania lub lokalu</li>
-                      <li>Liczba pomieszczeń</li>
-                      <li>Liczba okien</li>
-                      <li>Ilość pyłu budowlanego</li>
-                    </ul>
-                  </div>
-                  <div className="card card-accent">
-                    <ul className="list">
-                      <li>Rodzaj zabrudzeń</li>
-                      <li>Konieczność doczyszczania farby, kleju, fug lub silikonu</li>
-                      <li>Czy lokal jest pusty, czy umeblowany</li>
-                      <li>Zakres dodatkowy: balkon, garaż, piwnica, klatka schodowa</li>
-                    </ul>
-                  </div>
-                  <div className="card card-warm">
-                    <ul className="list">
-                      <li>Dostęp do windy</li>
-                      <li>Piętro i możliwość parkowania</li>
-                      <li>Termin realizacji</li>
-                      <li>Rodzaj lokalu i etap po remoncie</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        description="Poniższe stawki pomagają oszacować rząd wielkości kosztu, ale nie zastępują wyceny konkretnego lokalu."
+        id="cennik"
+        kicker="Cennik orientacyjny"
+        muted
+        title="Ile kosztuje sprzątanie po remoncie we Wrocławiu?"
+      >
+        <PricingTable />
+        <p className="ui-callout">
+          Podane kwoty są orientacyjne i nie stanowią oferty handlowej. Ostateczna cena
+          zależy od zakresu usługi i ustaleń z wykonawcą.
+        </p>
+        <div className="ui-cluster">
+          <Button href="#formularz">Sprawdź orientacyjny koszt</Button>
+        </div>
+      </ServiceSection>
 
-        <section className="section section--muted" id="formularz">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Formularz leadowy</p>
-                  <h2 className="section-title">Poproś o wycenę sprzątania po remoncie</h2>
-                  <p className="section-copy">
-                    Im dokładniej opiszesz metraż, zakres i zabrudzenia, tym łatwiej
-                    będzie przygotować realną wycenę.
-                  </p>
-                </div>
-                <div className="form-shell">
-                  <form className="form" action="#" method="post">
-                    <div className="form-grid">
-                      <label className="field">
-                        Imię
-                        <input type="text" name="imie" autoComplete="given-name" required />
-                      </label>
-                      <label className="field">
-                        Telefon
-                        <input type="tel" name="telefon" autoComplete="tel" required />
-                      </label>
-                      <label className="field">
-                        E-mail (opcjonalnie)
-                        <input type="email" name="email" autoComplete="email" />
-                      </label>
-                      <label className="field">
-                        Lokalizacja / dzielnica
-                        <input type="text" name="lokalizacja" required />
-                      </label>
-                      <label className="field">
-                        Metraż
-                        <input type="text" name="metraz" placeholder="np. 58 m²" required />
-                      </label>
-                      <label className="field">
-                        Rodzaj lokalu
-                        <select name="rodzaj-lokalu" required>
-                          <option value="">Wybierz rodzaj lokalu</option>
-                          <option value="mieszkanie">mieszkanie</option>
-                          <option value="dom">dom</option>
-                          <option value="biuro">biuro</option>
-                          <option value="lokal-uslugowy">lokal usługowy</option>
-                          <option value="inny">inny</option>
-                        </select>
-                      </label>
-                      <label className="field">
-                        Rodzaj remontu
-                        <select name="rodzaj-remontu" required>
-                          <option value="">Wybierz rodzaj remontu</option>
-                          <option value="malowanie">malowanie</option>
-                          <option value="gladzie">gładzie</option>
-                          <option value="lazienka">łazienka</option>
-                          <option value="kuchnia">kuchnia</option>
-                          <option value="generalny">generalny remont</option>
-                          <option value="deweloperskie">wykończenie deweloperskie</option>
-                          <option value="inny">inny</option>
-                        </select>
-                      </label>
-                      <label className="field">
-                        Zakres
-                        <select name="zakres" required>
-                          <option value="">Wybierz zakres</option>
-                          <option value="cale-mieszkanie">całe mieszkanie</option>
-                          <option value="wybrane-pomieszczenia">wybrane pomieszczenia</option>
-                          <option value="lazienka">łazienka</option>
-                          <option value="kuchnia">kuchnia</option>
-                          <option value="okna">okna</option>
-                          <option value="balkon">balkon</option>
-                          <option value="klatka">klatka schodowa</option>
-                          <option value="lokal-po-ekipie">lokal po ekipie remontowej</option>
-                        </select>
-                      </label>
-                      <label className="field">
-                        Czy potrzebne mycie okien?
-                        <select name="okna" required>
-                          <option value="">Wybierz opcję</option>
-                          <option value="tak">tak</option>
-                          <option value="nie">nie</option>
-                          <option value="nie-wiem">nie wiem</option>
-                        </select>
-                      </label>
-                      <label className="field">
-                        Preferowany termin
-                        <select name="termin" required>
-                          <option value="">Wybierz termin</option>
-                          <option value="jak-najszybciej">jak najszybciej</option>
-                          <option value="w-tym-tygodniu">w tym tygodniu</option>
-                          <option value="w-przyszlym-tygodniu">w przyszłym tygodniu</option>
-                          <option value="konkretny-termin">konkretny termin</option>
-                        </select>
-                      </label>
-                    </div>
+      <ServiceSection
+        id="czynniki-ceny"
+        kicker="Czynniki ceny"
+        title="Co wpływa na cenę sprzątania poremontowego?"
+      >
+        <CardsGrid cards={priceFactorCards} columns={3} />
+      </ServiceSection>
 
-                    <label className="field">
-                      Opis sytuacji
-                      <textarea
-                        name="opis"
-                        rows={5}
-                        placeholder="Opisz zakres zabrudzeń, liczbę okien, piętro, parking i to, czy remont jest już zakończony."
-                      />
-                    </label>
+      <ServiceSection
+        description="Im dokładniej opiszesz metraż, zakres i zabrudzenia, tym łatwiej będzie przygotować realną wycenę."
+        id="formularz"
+        kicker="Formularz leadowy"
+        muted
+        title="Poproś o wycenę sprzątania po remoncie"
+      >
+        <RenovationLeadForm />
+      </ServiceSection>
 
-                    <label className="field">
-                      Zdjęcia zabrudzeń (opcjonalnie)
-                      <input type="file" name="zdjecia" accept="image/*" multiple />
-                    </label>
+      <ServiceSection
+        id="checklista"
+        kicker="Checklista"
+        title="Checklista sprzątania po remoncie"
+      >
+        <CardsGrid cards={checklistCards} />
+      </ServiceSection>
 
-                    <div className="checkbox-list checkbox-list--consents">
-                      <label className="checkbox-row checkbox-row--consent">
-                        <input type="checkbox" name="zgoda-kontakt" required />
-                        <span>
-                          Wysyłając formularz, zgadzasz się na kontakt w sprawie
-                          przesłanego zapytania.
-                        </span>
-                      </label>
-                      <label className="checkbox-row checkbox-row--consent">
-                        <input type="checkbox" name="zgoda-przekazanie" required />
-                        <span>
-                          Wyrażam zgodę na przekazanie mojego zapytania partnerowi
-                          realizującemu usługi sprzątania w celu przygotowania wyceny.
-                        </span>
-                      </label>
-                    </div>
+      <ServiceSection
+        id="uwagi"
+        kicker="Na co zwrócić uwagę"
+        muted
+        title="Na co zwrócić uwagę przy sprzątaniu po remoncie?"
+      >
+        <CardsGrid cards={attentionCards} />
+      </ServiceSection>
 
-                    <div className="form-actions">
-                      <button className="btn primary" type="submit">
-                        Wyślij zapytanie o wycenę
-                      </button>
-                      <span className="support-copy">
-                        Zgłoszenie pomaga szybciej określić realny zakres, termin i
-                        możliwość wyceny.
-                      </span>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        description="Zapytania można składać dla mieszkań, domów, biur i lokali na terenie Wrocławia oraz okolic. Najczęściej sprzątanie po remoncie dotyczy mieszkań w nowych inwestycjach, lokali po wykończeniu deweloperskim, mieszkań po malowaniu, remontach łazienki, kuchni lub całkowitej modernizacji."
+        id="lokalizacje"
+        kicker="Lokalnie"
+        title="Sprzątanie po remoncie Wrocław i okolice"
+      >
+        <CardsGrid cards={areaCards} />
+        <div className="ui-cluster">
+          <Button href="#formularz">Wyślij zapytanie z Wrocławia lub okolic</Button>
+        </div>
+      </ServiceSection>
 
-        <section className="section" id="checklista">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Checklista</p>
-                  <h2 className="section-title">Checklista sprzątania po remoncie</h2>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <ul className="checklist">
-                      <li>Czy remont jest już zakończony?</li>
-                      <li>Czy ekipa remontowa wyniosła odpady?</li>
-                      <li>Czy w lokalu są jeszcze narzędzia lub materiały?</li>
-                      <li>Czy trzeba myć okna?</li>
-                    </ul>
-                  </div>
-                  <div className="card card-accent">
-                    <ul className="checklist">
-                      <li>Czy są zabrudzenia po farbie, silikonie, kleju lub fugach?</li>
-                      <li>Czy mieszkanie ma być gotowe do zamieszkania lub wynajmu?</li>
-                      <li>Czy jest dostęp do prądu i wody?</li>
-                      <li>Czy można zaparkować blisko budynku?</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <ServiceSection
+        id="faq"
+        kicker="FAQ"
+        muted
+        title="Najczęstsze pytania"
+      >
+        <FAQAccordion items={faqItems} />
+        <div className="ui-cluster">
+          <Button href="#formularz">Zgłoś sprzątanie po remoncie</Button>
+        </div>
+      </ServiceSection>
 
-        <section className="section section--muted" id="uwagi">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Na co zwrócić uwagę</p>
-                  <h2 className="section-title">
-                    Na co zwrócić uwagę przy sprzątaniu po remoncie?
-                  </h2>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <ul className="list">
-                      <li>Nie każda powierzchnia może być szorowana</li>
-                      <li>Pył po gładzi wraca, jeśli lokal nie jest dokładnie odkurzony</li>
-                      <li>Okna po remoncie wymagają ostrożności</li>
-                    </ul>
-                  </div>
-                  <div className="card card-warm">
-                    <ul className="list">
-                      <li>Resztki silikonu, farby i kleju mogą wymagać osobnego doczyszczania</li>
-                      <li>Odpady budowlane zwykle nie są częścią standardowego sprzątania</li>
-                      <li>Dobre zgłoszenie powinno zawierać metraż, zdjęcia i informacje o zabrudzeniach</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="lokalizacje">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Lokalnie</p>
-                  <h2 className="section-title">Sprzątanie po remoncie Wrocław i okolice</h2>
-                  <p className="section-copy">
-                    Zapytania można składać dla mieszkań, domów, biur i lokali na
-                    terenie Wrocławia oraz okolic. Najczęściej sprzątanie po remoncie
-                    dotyczy mieszkań w nowych inwestycjach, lokali po wykończeniu
-                    deweloperskim, mieszkań po malowaniu, remontach łazienki, kuchni
-                    lub całkowitej modernizacji.
-                  </p>
-                </div>
-                <div className="grid grid-2">
-                  <div className="card">
-                    <h3 className="card-title">Wrocław</h3>
-                    <p className="support-copy">
-                      Krzyki, Fabryczna, Psie Pole, Śródmieście, Stare Miasto, Jagodno,
-                      Ołtaszyn, Muchobór, Leśnica, Zakrzów, Klecina, Brochów i Biskupin.
-                    </p>
-                  </div>
-                  <div className="card card-accent">
-                    <h3 className="card-title">Okolice</h3>
-                    <p className="support-copy">
-                      Bielany Wrocławskie, Długołęka, Kiełczów, Siechnice, Kobierzyce,
-                      Smolec, Radwanice i Żórawina.
-                    </p>
-                  </div>
-                </div>
-                <div className="cta-group">
-                  <a className="btn primary" href="#formularz">
-                    Wyślij zapytanie z Wrocławia lub okolic
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section section--muted" id="faq">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">FAQ</p>
-                  <h2 className="section-title">Najczęstsze pytania</h2>
-                </div>
-                <div className="faq-list">
-                  {faqItems.map((item) => (
-                    <details className="faq-item" key={item.question}>
-                      <summary>{item.question}</summary>
-                      <p>{item.answer}</p>
-                    </details>
-                  ))}
-                </div>
-                <div className="cta-group">
-                  <a className="btn primary" href="#formularz">
-                    Zgłoś sprzątanie po remoncie
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container">
-            <div className="section-frame reveal">
-              <div className="section-inner section-stack">
-                <div className="section-header stack-sm">
-                  <p className="section-kicker">Zobacz też</p>
-                  <h2 className="section-title">Powiązane zapytania i strony</h2>
-                  <p className="section-copy">
-                    Jeśli porównujesz różne typy usług, zobacz też stronę główną oraz
-                    sekcje dotyczące sprzątania mieszkań, mycia okien i sprzątania po
-                    wyprowadzce.
-                  </p>
-                </div>
-                <div className="link-grid">
-                  <Link className="card link-card" href="/">
-                    <span className="card-title">Strona główna</span>
-                    <span className="support-copy">
-                      Ogólny formularz zapytań o sprzątanie we Wrocławiu.
-                    </span>
-                  </Link>
-                  <Link className="card link-card" href="/#wybor">
-                    <span className="card-title">Sprzątanie mieszkań</span>
-                    <span className="support-copy">
-                      Zobacz zakres dla mieszkań i domów.
-                    </span>
-                  </Link>
-                  <Link className="card link-card" href="/#edukacja">
-                    <span className="card-title">Mycie okien</span>
-                    <span className="support-copy">
-                      Informacje o dodatkach i usługach dodatkowych.
-                    </span>
-                  </Link>
-                  <Link className="card link-card" href="/#wybor">
-                    <span className="card-title">Sprzątanie po wyprowadzce</span>
-                    <span className="support-copy">
-                      Zakres przy przygotowaniu lokalu do najmu lub sprzedaży.
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <div className="mobile-sticky-bar">
-        <a className="mobile-sticky-link" href="#formularz">
-          Formularz
-        </a>
-        <a className="mobile-sticky-link" href="#cennik">
-          Wycena
-        </a>
-        <a className="mobile-sticky-link" href="#faq">
-          Kontakt
-        </a>
-      </div>
-    </div>
+      <ServiceSection
+        description="Jeśli porównujesz różne typy usług, zobacz też stronę główną oraz sekcje dotyczące sprzątania mieszkań, mycia okien i sprzątania po wyprowadzce."
+        kicker="Zobacz też"
+        title="Powiązane zapytania i strony"
+      >
+        <div className="ui-grid-2">
+          {relatedLinks.map((item) => (
+            <Link
+              className="ui-feature-card ui-related-link-card"
+              href={item.href}
+              key={`${item.href}-${item.title}`}
+            >
+              <span className="ui-feature-card__title">{item.title}</span>
+              <span className="ui-feature-card__description">{item.description}</span>
+            </Link>
+          ))}
+        </div>
+      </ServiceSection>
+    </PageShell>
   );
 }

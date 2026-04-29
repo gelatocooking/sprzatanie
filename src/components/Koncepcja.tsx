@@ -21,7 +21,7 @@ export default function Koncepcja() {
   return (
     <section id="koncepcja" className="ui-section">
       <Container>
-        <SectionCard>
+        <SectionCard muted>
           <div className="ui-stack-section">
             <SectionHeader kicker="Filar 2: Koncepcja" title="Jak wygląda wycena?" />
             <div className="ui-grid-2">

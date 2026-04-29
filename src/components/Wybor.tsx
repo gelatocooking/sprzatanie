@@ -66,7 +66,7 @@ export default function Wybor() {
   return (
     <section id="wybor" className="ui-section">
       <Container>
-        <SectionCard>
+        <SectionCard muted>
           <div className="ui-stack-section">
             <SectionHeader
               kicker="Filar 4: Wybór"

@@ -41,7 +41,7 @@ export default function Edukacja() {
   return (
     <section id="edukacja" className="ui-section">
       <Container>
-        <SectionCard muted>
+        <SectionCard>
           <div className="ui-stack-section">
             <SectionHeader
               kicker="Filar 3: Edukacja"

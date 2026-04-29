@@ -88,7 +88,7 @@ export default function Zakup() {
                     <option value="ustalenie">Do ustalenia</option>
                   </select>
                 </FormField>
-                <fieldset className="ui-fieldset" style={{ gridColumn: "1 / -1" }}>
+                <fieldset className="ui-fieldset ui-lead-form__full">
                   <legend className="ui-fieldset__legend">Dodatki (opcjonalnie)</legend>
                   <div className="ui-choice-list ui-choice-list--two-columns">
                     {extras.map((extra) => (
@@ -99,7 +99,7 @@ export default function Zakup() {
                     ))}
                   </div>
                 </fieldset>
-                <label className="ui-consent-row" style={{ gridColumn: "1 / -1" }}>
+                <label className="ui-consent-row ui-lead-form__full">
                   <input name="rodo" required type="checkbox" />
                   <span>Wyrażam zgodę na kontakt i przetwarzanie danych (RODO).</span>
                 </label>

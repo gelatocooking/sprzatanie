@@ -4,6 +4,7 @@ import Koncepcja from "../components/Koncepcja";
 import ObszarDzialania from "../components/ObszarDzialania";
 import PageShell from "../components/ui/PageShell";
 import Problem from "../components/Problem";
+import RozwiazeNieUsprawiedliwienia from "../components/RozwiazeNieUsprawiedliwienia";
 import SiteHeader from "../components/SiteHeader";
 import Wybor from "../components/Wybor";
 import Zakup from "../components/Zakup";
@@ -94,6 +95,7 @@ export default function Home() {
           links={[
             { href: "#problem", label: "Problem" },
             { href: "#koncepcja", label: "Jak to działa" },
+            { href: "#rozwiazania", label: "Rozwiązania" },
             { href: "#edukacja", label: "Cennik i zakres" },
             { href: "#wybor", label: "Dlaczego my" },
             { href: "#zakup", label: "Zgłoszenie" },
@@ -112,6 +114,7 @@ export default function Home() {
       <Hero />
       <Problem />
       <Koncepcja />
+      <RozwiazeNieUsprawiedliwienia />
       <Edukacja />
       <Wybor />
       <ObszarDzialania />

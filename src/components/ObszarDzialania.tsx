@@ -33,7 +33,7 @@ export default function ObszarDzialania() {
   return (
     <section id="obszar" className="ui-section">
       <Container>
-        <SectionCard>
+        <SectionCard muted>
           <div className="ui-stack-section">
             <SectionHeader
               description="Działamy na terenie Wrocławia i okolic. Najczęściej obsługujemy mieszkania, domy, biura i lokale w dzielnicach z dobrym dojazdem oraz zleceniami pilnymi, po remoncie i przed wynajmem."

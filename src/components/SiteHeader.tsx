@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import Button from "./ui/Button";
+import Container from "./ui/Container";
+
 type SiteHeaderLink = {
   href: string;
   label: string;
@@ -11,28 +14,24 @@ type SiteHeaderProps = {
   ctaLabel: string;
 };
 
-export default function SiteHeader({
-  links,
-  ctaHref,
-  ctaLabel,
-}: SiteHeaderProps) {
+export default function SiteHeader({ links, ctaHref, ctaLabel }: SiteHeaderProps) {
   return (
-    <header className="site-header">
-      <div className="container header-inner">
-        <Link className="brand" href="/">
-          Sprzątanie<span>Pro</span>
+    <header className="ui-site-header">
+      <Container className="ui-site-header__inner">
+        <Link className="ui-site-header__brand" href="/">
+          Sprzatanie<span>Pro</span>
         </Link>
-        <nav className="nav-inline">
+        <nav className="ui-site-header__nav">
           {links.map((link) => (
-            <a key={link.href} href={link.href}>
+            <a href={link.href} key={link.href}>
               {link.label}
             </a>
           ))}
         </nav>
-        <a className="btn secondary" href={ctaHref}>
+        <Button href={ctaHref} variant="secondary">
           {ctaLabel}
-        </a>
-      </div>
+        </Button>
+      </Container>
     </header>
   );
 }
