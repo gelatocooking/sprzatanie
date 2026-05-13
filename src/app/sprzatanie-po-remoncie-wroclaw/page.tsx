@@ -458,7 +458,7 @@ function RenovationLeadForm() {
   return (
     <div className="ui-form-shell">
       <LeadForm
-        action="#"
+        action="/api/contact"
         method="post"
         support="Zgłoszenie pomaga szybciej określić realny zakres, termin i możliwość wyceny."
         actions={

@@ -25,7 +25,7 @@ export default function Zakup() {
             />
             <div className="ui-form-shell">
               <LeadForm
-                action="#"
+                action="/api/contact"
                 actions={
                   <Button size="lg" type="submit" variant="primary">
                     Wyślij zakres i termin

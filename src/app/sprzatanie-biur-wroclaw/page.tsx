@@ -416,7 +416,7 @@ function OfficeLeadForm() {
   return (
     <div className="ui-form-shell">
       <LeadForm
-        action="#"
+        action="/api/contact"
         method="post"
         support="Im dokładniej opiszesz biuro i oczekiwany zakres, tym szybciej można przygotować sensowną wycenę."
         actions={

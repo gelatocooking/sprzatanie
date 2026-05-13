@@ -393,7 +393,7 @@ export default function TestPage() {
               />
               <div className="ui-form-shell">
                 <LeadForm
-                  action="#"
+                  action="/api/contact"
                   method="post"
                   support="Im dokładniej opiszesz nieruchomość, tym łatwiej ustalić sensowny zakres obsługi."
                   actions={
