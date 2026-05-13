@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const serviceLinks = [
   { href: "/", label: "Sprzątanie mieszkań Wrocław" },
+  { href: "/sprzatanie-domow-wroclaw", label: "Sprzątanie domów Wrocław" },
   { href: "/sprzatanie-biur-wroclaw", label: "Sprzątanie biur Wrocław" },
   { href: "/sprzatanie-po-remoncie-wroclaw", label: "Sprzątanie po remoncie Wrocław" },
   { href: "/#edukacja", label: "Cennik usług sprzątania" },
@@ -9,6 +10,7 @@ const serviceLinks = [
 
 const conversionLinks = [
   { href: "/#zakup", label: "Wyślij metraż i zakres prac" },
+  { href: "/sprzatanie-domow-wroclaw#formularz", label: "Opisz sprzątanie domu" },
   { href: "/sprzatanie-biur-wroclaw#zakup", label: "Opisz sprzątanie biura" },
   { href: "/sprzatanie-po-remoncie-wroclaw#formularz", label: "Opisz sprzątanie po remoncie" },
   { href: "/#zakup", label: "Sprawdź dostępny termin" },
@@ -34,7 +36,7 @@ export default function SiteFooter() {
         <div className="ui-site-footer__grid">
           <div className="ui-site-footer__intro">
             <p className="ui-site-footer__kicker">Usługi sprzątania Wrocław</p>
-            <h2 className="ui-site-footer__title">Sprzątanie mieszkań, biur i lokali</h2>
+            <h2 className="ui-site-footer__title">Sprzątanie mieszkań, domów, biur i lokali</h2>
             <p className="ui-site-footer__description">
               Pomagamy zebrać zgłoszenie dotyczące sprzątania mieszkań, domów, biur,
               lokali usługowych i sprzątania po remoncie we Wrocławiu oraz okolicach.
@@ -73,7 +75,7 @@ export default function SiteFooter() {
         <div className="ui-site-footer__bottom">
           <p>
             © 2026 Usługi Sprzątania Wrocław. Zapytania o sprzątanie mieszkań,
-            biur i lokali we Wrocławiu.
+            domów, biur i lokali we Wrocławiu.
           </p>
         </div>
       </div>

@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import type { Attachment } from "nodemailer/lib/mailer";
 
 export const runtime = "nodejs";
 
 const ignoredFields = new Set(["website", "_sourcePath"]);
+const maxAttachmentBytes = 12 * 1024 * 1024;
 
 function env(name: string) {
   return process.env[name]?.trim();
@@ -46,6 +48,31 @@ function getAllFields(formData: FormData) {
   }
 
   return fields;
+}
+
+async function getAttachments(formData: FormData) {
+  const attachments: Attachment[] = [];
+  let totalBytes = 0;
+
+  for (const [, value] of formData.entries()) {
+    if (!(value instanceof File) || value.size === 0) {
+      continue;
+    }
+
+    totalBytes += value.size;
+
+    if (totalBytes > maxAttachmentBytes) {
+      throw new Error("Załączniki są za duże. Maksymalny łączny rozmiar to 12 MB.");
+    }
+
+    attachments.push({
+      filename: value.name,
+      content: Buffer.from(await value.arrayBuffer()),
+      contentType: value.type || undefined,
+    });
+  }
+
+  return attachments;
 }
 
 function pickReplyTo(fields: Map<string, string[]>) {
@@ -101,6 +128,16 @@ export async function POST(request: Request) {
   }
 
   const fields = getAllFields(formData);
+  let attachments: Attachment[];
+
+  try {
+    attachments = await getAttachments(formData);
+  } catch (error) {
+    return NextResponse.json(
+      { message: error instanceof Error ? error.message : "Nie udało się odczytać załączników." },
+      { status: 400 },
+    );
+  }
   const sourcePath = String(formData.get("_sourcePath") || request.headers.get("referer") || "/");
 
   if (!fields.size) {
@@ -139,6 +176,7 @@ export async function POST(request: Request) {
     subject: `Nowe zgloszenie ze strony ${sourcePath}`,
     text: renderText(fields, sourcePath),
     html: renderHtml(fields, sourcePath),
+    attachments,
   });
 
   return NextResponse.json({ message: "Dzieki, zgloszenie zostalo wyslane." });
